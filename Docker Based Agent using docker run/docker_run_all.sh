@@ -6,32 +6,39 @@ docker run -d --name dd-agent \
 -e DD_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
 -e DD_SITE="datadoghq.com" \
 -e DD_ENV=<ENV> \
+
 # Enable APM
 -e DD_APM_ENABLED=true \
 -e DD_APM_NON_LOCAL_TRAFFIC=true \
 -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
 -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
 -v /opt/datadog/apm:/opt/datadog/apm \
+
 # Enable AppSec
 -e DD_APPSEC_ENABLED=true \
 -e DD_IAST_ENABLED=true \
 -e DD_APPSEC_SCA_ENABLED \
 -e DD_APM_NON_LOCAL_TRAFFIC=true \
+
 # Enable Logs
 -e DD_LOGS_ENABLED=true \
 -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
 -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
+
 # Enable Process Collection
 -e DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true \
 -v /etc/passwd:/etc/passwd:ro \
+
 # Enable Network Performance Monitoring
 -e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
+
 # Enable Cloud Security
 -e DD_COMPLIANCE_CONFIG_ENABLED=true \
 -e DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true \
 -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
 -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
+
 # Enable Universal Service Monitoring
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -v /lib/modules:/lib/modules:ro \
@@ -45,11 +52,13 @@ docker run -d --name dd-agent \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
+
 # Basic volumes needed
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
 -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+
 # Needed for Process Monitoring/Network Monitoring/Cloud Security
 -e HOST_ROOT=/host/root \
 -v /etc/group:/etc/group:ro \
