@@ -58,6 +58,15 @@ datadog:
   dataStreamsMonitoring:
     enabled: true
 
+## Enable ASM SCA CodeSec
+  asm:
+    threats:
+      enabled: true
+    sca:
+      enabled: true
+    iast:
+      enabled: true
+
 ## Cloud Security Posture Management
   securityAgent:
     compliance:
@@ -69,6 +78,11 @@ datadog:
       fimEnabled: true  ##Set to true to enable Cloud Workload Security (CWS) File Integrity Monitoring
       network: 
         enabled: true     ##Set to true to enable the collection of CWS network events
+    sbom:
+      containerImage:
+        enabled: true
+      host:
+        enabled: true
 
 ## Remote Configuration
 remoteConfiguration:
