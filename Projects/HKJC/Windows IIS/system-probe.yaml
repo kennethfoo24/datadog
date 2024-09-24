@@ -1,7 +1,0 @@
- ## Universal Service Monitoring
-service_monitoring_config:
-  enabled: true
-
- ## Network Performance Monitoring
-network_config:
-  enabled: true
