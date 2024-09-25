@@ -41,5 +41,11 @@ otlp_config:
   logs:
     enabled: true
 
+## Host Vulnerability Scanning
+sbom:
+    enabled: true
+    host:
+        enabled: true
+        
 ## If using Windows EC2 Auto Scaling Group https://docs.datadoghq.com/agent/faq/ec2-use-win-prefix-detection/ 
 ec2_use_windows_prefix_detection: true
