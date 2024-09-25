@@ -1,5 +1,5 @@
 runtime_security_config: 
     enabled: true
-    # FIM should not be enabled on production workloads.
-    #fim_enabled: true
+    # File Integrity Monitoring (FIM)
+    fim_enabled: true
 
