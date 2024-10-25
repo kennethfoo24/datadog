@@ -1,6 +1,6 @@
 # CWS
 runtime_security_config: 
-    enabled: true
+  enabled: true
 
 # CSPM
 compliance_config:
