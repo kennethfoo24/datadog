@@ -54,7 +54,7 @@ $tags = "service:$serviceName,source:$sourceName,env:$environmentName"
 
 # Step 3: Install the Datadog Agent
 Write-Host "Installing Datadog Agent"
-Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi" APIKEY=`"$apiKey`" SITE=`"$ddSite`" TAGS=`"$tags`" '
+Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi" APIKEY="$apiKey" SITE="$ddSite" TAGS="$tags"'
 
 # Step 4: Configure the Datadog Agent
 Write-Host "Configuring Datadog Agent"
