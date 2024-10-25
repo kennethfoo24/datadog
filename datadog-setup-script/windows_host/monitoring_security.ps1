@@ -183,4 +183,5 @@ $systemprobeYamlContent | Set-Content -Path $systemprobeConfigFile -Encoding UTF
 
 # Step 5: Restart the Datadog Agent Service
 Write-Host "Restarting Datadog Agent Service"
-Restart-Service -Name "datadogagent"
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
