@@ -53,9 +53,11 @@ if ([string]::IsNullOrEmpty($environmentName)) {
 $tags = "service:$serviceName,source:$sourceName,env:$environmentName"
 
 # Step 3: Install the Datadog Agent
+Write-Host "Installing Datadog Agent"
 Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi" APIKEY=`"$apiKey`" SITE=`"$DD_SITE`" TAGS=`"$tags`" '
 
 # Step 4: Configure the Datadog Agent
+Write-Host "Configuring Datadog Agent"
 $configFile = "C:\ProgramData\Datadog\datadog.yaml"
 
 # Check if the configuration file exists
@@ -69,6 +71,7 @@ if (Test-Path $configFile) {
 # Update the datadog.yaml file with the provided content
 
 # Path to the datadog.yaml file
+Write-Host "Updating datadog.yaml file"
 $configFile = "C:\ProgramData\Datadog\datadog.yaml"
 
 # Content to write to datadog.yaml
@@ -133,6 +136,7 @@ $yamlContent | Set-Content -Path $configFile -Encoding UTF8
 # Update the security-agent.yaml file with the provided content
 
 # Path to the security-agent.yaml file
+Write-Host "Updating security-agent.yaml file"
 $securityConfigFile = "C:\ProgramData\Datadog\security-agent.yaml"
 
 # Content to write to security-agent.yaml
@@ -149,6 +153,7 @@ $securityYamlContent | Set-Content -Path $securityConfigFile -Encoding UTF8
 # Update the system-probe.yaml file with the provided content
 
 # Path to the system-probe.yaml file
+Write-Host "Updating system-probe.yaml file"
 $systemprobeConfigFile = "C:\ProgramData\Datadog\system-probe.yaml"
 
 # Content to write to system-probe.yaml
@@ -177,4 +182,5 @@ runtime_security_config:
 $systemprobeYamlContent | Set-Content -Path $systemprobeConfigFile -Encoding UTF8
 
 # Step 5: Restart the Datadog Agent Service
+Write-Host "Restarting Datadog Agent Service"
 Restart-Service -Name "datadogagent"
