@@ -7,26 +7,26 @@ Write-Host "4) EU1 (Datadog EU)"
 Write-Host "5) US1-FED (Datadog US1 Federal)"
 Write-Host "6) AP1 (Datadog AP1)"
 
-$SITE_SELECTION = Read-Host "Enter the number corresponding to your site [1]:"
-if ([string]::IsNullOrEmpty($SITE_SELECTION)) {
-    $SITE_SELECTION = "1"
+$siteSelection = Read-Host "Enter the number corresponding to your site [1]:"
+if ([string]::IsNullOrEmpty($siteSelection)) {
+    $siteSelection = "1"
 }
 
 # Map the selection to the site parameter
-switch ($SITE_SELECTION) {
-    "1" { $DD_SITE = "datadoghq.com" }
-    "2" { $DD_SITE = "us3.datadoghq.com" }
-    "3" { $DD_SITE = "us5.datadoghq.com" }
-    "4" { $DD_SITE = "datadoghq.eu" }
-    "5" { $DD_SITE = "ddog-gov.com" }
-    "6" { $DD_SITE = "ap1.datadoghq.com" }
+switch ($siteSelection) {
+    "1" { $ddSite = "datadoghq.com" }
+    "2" { $ddSite = "us3.datadoghq.com" }
+    "3" { $ddSite = "us5.datadoghq.com" }
+    "4" { $ddSite = "datadoghq.eu" }
+    "5" { $ddSite = "ddog-gov.com" }
+    "6" { $ddSite = "ap1.datadoghq.com" }
     default {
         Write-Host "Invalid selection. Defaulting to US1 (datadoghq.com)."
-        $DD_SITE = "datadoghq.com"
+        $ddSite = "datadoghq.com"
     }
 }
 
-Write-Host "Selected Datadog site: $DD_SITE"
+Write-Host "Selected Datadog site: $ddSite"
 
 # Prompt for Datadog API key
 $apiKey = Read-Host "Enter your Datadog API key"
@@ -54,7 +54,7 @@ $tags = "service:$serviceName,source:$sourceName,env:$environmentName"
 
 # Step 3: Install the Datadog Agent
 Write-Host "Installing Datadog Agent"
-Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi" APIKEY=`"$apiKey`" SITE=`"$DD_SITE`" TAGS=`"$tags`" '
+Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi" APIKEY=`"$apiKey`" SITE=`"$ddSite`" TAGS=`"$tags`" '
 
 # Step 4: Configure the Datadog Agent
 Write-Host "Configuring Datadog Agent"
@@ -82,7 +82,7 @@ $yamlContent = @"
 ## Linux: /etc/datadog-agent/datadog.yaml
 ## Windows: %ProgramData%\Datadog\datadog.yaml
 api_key: $apiKey
-site: $DD_SITE
+site: $ddSite
 env: $environmentName
 
 ## Tags https://docs.datadoghq.com/tagging/
