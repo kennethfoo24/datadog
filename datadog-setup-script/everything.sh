@@ -72,7 +72,7 @@ read -p "Enter the environment of your service (eg: production,staging) [default
 ENV_NAME=${ENV_NAME:-default_env}
 
 # Install the Datadog Agent using the installation link
-DD_API_KEY="$DD_API_KEY" DD_ENV="$ENV_NAME" DD_APM_INSTRUMENTATION_ENABLED=host DD_LOGS_INJECTION=true DD_TRACE_SAMPLE_RATE="1" DD_RUNTIME_METRICS_ENABLED=true DD_PROFILING_ENABLED=true DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true DD_APPSEC_SCA_ENABLED=true DD_RUNTIME_SECURITY_CONFIG_ENABLED=true DD_SBOM_CONTAINER_IMAGE_ENABLED=true DD_SBOM_HOST_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY="$DD_API_KEY" DD_ENV="$ENV_NAME" DD_APM_INSTRUMENTATION_ENABLED=host DD_TRACE_DEBUG=true DD_LOGS_INJECTION=true DD_TRACE_SAMPLE_RATE="1" DD_RUNTIME_METRICS_ENABLED=true DD_PROFILING_ENABLED=true DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true DD_APPSEC_SCA_ENABLED=true DD_RUNTIME_SECURITY_CONFIG_ENABLED=true DD_SBOM_CONTAINER_IMAGE_ENABLED=true DD_SBOM_HOST_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
 # Append custom configuration to the datadog.yaml file
 echo "Appending custom configuration to /etc/datadog-agent/datadog.yaml..."
