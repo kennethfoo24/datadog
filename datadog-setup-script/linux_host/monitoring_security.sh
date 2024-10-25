@@ -233,6 +233,14 @@ find / -type f -name "*.log" 2>/dev/null | while read -r logfile; do
 done
 
 # Restart the Datadog Agent to apply changes
-systemctl restart datadog-agent
+echo "Restarting the Datadog Agent..."
+
+if command -v systemctl >/dev/null; then
+    sudo systemctl restart datadog-agent
+elif command -v service >/dev/null; then
+    sudo service datadog-agent restart
+else
+    echo "Could not determine how to restart the Datadog Agent. Please restart it manually."
+fi
 
 echo "Datadog Agent installation and configuration complete."
