@@ -15,6 +15,6 @@ system_probe_config:
 
  ## Cloud Security Management
 runtime_security_config: 
+  enabled: true
+  remote_configuration:
     enabled: true
-    remote_configuration:
-      enabled: true
