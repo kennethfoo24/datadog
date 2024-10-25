@@ -1,19 +1,19 @@
- ## Universal Service Monitoring
+## Universal Service Monitoring
 service_monitoring_config:
   enabled: true
 
- ## Network Performance Monitoring
+## Network Performance Monitoring
 network_config:
   enabled: true
 
- ## Process Monitoring I/O Stats
+## Process Monitoring I/O Stats
 system_probe_config:
   process_config:
     enabled: true
 
- ## Cloud Security Management
+## Cloud Security Management
 runtime_security_config: 
-    enabled: true
-    # File Integrity Monitoring (FIM)
-    fim_enabled: true
+  enabled: true
+  # File Integrity Monitoring (FIM)
+  fim_enabled: true
 
