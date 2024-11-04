@@ -181,6 +181,34 @@ runtime_security_config:
 # Write the content to the system-probe.yaml file
 $systemprobeYamlContent | Set-Content -Path $systemprobeConfigFile -Encoding UTF8
 
+# Update the win32_event_log.d/conf.yaml file with the provided content
+
+# Path to the win32_event_log.d/conf.yaml file
+Write-Host "Updating win32_event_log.d/conf.yaml file"
+$windowsEventLogConfigFile = "C:\ProgramData\Datadog\conf.d\win32_event_log.d\conf.yaml"
+
+# Content to write to system-probe.yaml
+$windowsEventLogYamlContent = @"
+logs:
+  - type: windows_event
+    channel_path: Security
+    source: windows.events
+    service: windows-security
+
+  - type: windows_event
+    channel_path: System
+    source: windows.events
+    service: windows-system
+  
+  - type: windows_event
+    channel_path: Application
+    source: windows.events
+    service: windows-application
+"@
+
+# Write the content to the win32_event_log.d/conf.yaml file
+$windowsEventLogYamlContent | Set-Content -Path $windowsEventLogConfigFile -Encoding UTF8
+
 # Step 5: Restart the Datadog Agent Service
 Write-Host "Restarting Datadog Agent Service"
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
