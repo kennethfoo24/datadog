@@ -209,6 +209,25 @@ logs:
 # Write the content to the win32_event_log.d/conf.yaml file
 $windowsEventLogYamlContent | Set-Content -Path $windowsEventLogConfigFile -Encoding UTF8
 
+# Create a new log configuration to collect all logs from every directory
+$logsConfig = @"
+logs:
+  - type: file
+    path: "C:\\**\\*.log"
+    service: $serviceName
+    source: $sourceName
+"@
+
+# Create log configuration directory if it doesn't exist
+if (-not (Test-Path $logConfigDirectory)) {
+    New-Item -Path $logConfigDirectory -ItemType Directory
+}
+
+# Write the log configuration to a file
+$logConfPath = "$logConfigDirectory\all_logs.d\conf.yaml"
+New-Item -Path "$logConfigDirectory\all_logs.d" -ItemType Directory -Force
+Set-Content -Path $logConfPath -Value $logsConfig
+
 # Step 5: Restart the Datadog Agent Service
 Write-Host "Restarting Datadog Agent Service"
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
