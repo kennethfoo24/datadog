@@ -217,3 +217,4 @@ Write-Host "Restarting Datadog Agent Service"
 Start-Sleep -Seconds 10  # Adjust the sleep time if necessary
 
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" launch-gui
