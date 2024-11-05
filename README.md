@@ -1,5 +1,5 @@
 
-# Datadog Installation Script
+# Datadog Installation Script (Host-based Setup)
 
 
 
