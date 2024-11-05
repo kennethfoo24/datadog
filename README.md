@@ -23,9 +23,9 @@ sudo bash -c "$(curl -L https://raw.githubusercontent.com/kennethfoo24/datadog/r
 
 ## Screenshots
 
-![App Screenshot](https://ibb.co/y69cTkS)
+![App Screenshot](https://i.ibb.co/4t6fGH9/Screenshot-2024-11-05-at-6-56-46-PM.png)
 
-![App Screenshot](https://ibb.co/2hD6QTm)
+![App Screenshot](https://i.ibb.co/6HM7htB/Screenshot-2024-11-05-at-6-54-37-PM.png)
 
 
 
