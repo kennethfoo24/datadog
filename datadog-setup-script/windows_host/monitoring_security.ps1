@@ -211,29 +211,41 @@ $windowsEventLogYamlContent | Set-Content -Path $windowsEventLogConfigFile -Enco
 
 # Create a new log configuration to collect all logs from every directory
 $logConfigDirectory = "C:\ProgramData\Datadog\conf.d"
-$logsConfig = @"
-logs:
+$logsConfig = "logs:"
+$drives = Get-PSDrive -PSProvider FileSystem | Where-Object { $_.Root -match "^[A-Z]:\\" }
+
+foreach ($drive in $drives) {
+    $driveLetter = $drive.Root
+    $logsConfig += @"
+    
   - type: file
-    path: "C:\\**\\*.log"
+    path: "$driveLetter\**\\*.log"
     service: $serviceName
     source: $sourceName
+    env: $environmentName
   - type: file
-    path: "C:\\**\\*\\*.log"
+    path: "$driveLetter\**\\*\\*.log"
     service: $serviceName
     source: $sourceName
+    env: $environmentName
   - type: file
-    path: "C:\\**\\*\\*\\*.log"
+    path: "$driveLetter\**\\*\\*\\*.log"
     service: $serviceName
     source: $sourceName
+    env: $environmentName
   - type: file
-    path: "C:\\**\\*\\*\\*\\*.log"
+    path: "$driveLetter\**\\*\\*\\*\\*.log"
     service: $serviceName
     source: $sourceName
+    env: $environmentName
   - type: file
-    path: "C:\\**\\*\\*\\*\\*\\*.log"
+    path: "$driveLetter\**\\*\\*\\*\\*\\*.log"
     service: $serviceName
     source: $sourceName
+    env: $environmentName
 "@
+}
+
 
 # Create log configuration directory if it doesn't exist
 if (-not (Test-Path $logConfigDirectory)) {
