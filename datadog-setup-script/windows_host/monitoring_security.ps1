@@ -217,6 +217,22 @@ logs:
     path: "C:\\**\\*.log"
     service: $serviceName
     source: $sourceName
+  - type: file
+    path: "C:\\**\\*\\*.log"
+    service: $serviceName
+    source: $sourceName
+  - type: file
+    path: "C:\\**\\*\\*\\*.log"
+    service: $serviceName
+    source: $sourceName
+  - type: file
+    path: "C:\\**\\*\\*\\*\\*.log"
+    service: $serviceName
+    source: $sourceName
+  - type: file
+    path: "C:\\**\\*\\*\\*\\*\\*.log"
+    service: $serviceName
+    source: $sourceName
 "@
 
 # Create log configuration directory if it doesn't exist
