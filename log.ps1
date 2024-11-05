@@ -1,5 +1,5 @@
 # Define the path to the log file
-$logFilePath = "C:\Logs\mylog.txt"
+$logFilePath = "C:\Logs\mylog.log"
 
 # Ensure the Logs directory exists
 if (!(Test-Path -Path "C:\Logs")) {
