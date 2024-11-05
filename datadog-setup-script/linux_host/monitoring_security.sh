@@ -212,15 +212,15 @@ logs:
     service: $SERVICE_NAME
     source: $SOURCE_NAME
   - type: file
-    path: /*/**/*.log
+    path: /**/**/*.log
     service: $SERVICE_NAME
     source: $SOURCE_NAME
   - type: file
-    path: /*/**/**/*.log
+    path: /**/**/**/*.log
     service: $SERVICE_NAME
     source: $SOURCE_NAME
   - type: file
-    path: /*/**/**/**/*.log
+    path: /**/**/**/**/*.log
     service: $SERVICE_NAME
     source: $SOURCE_NAME
 EOF
