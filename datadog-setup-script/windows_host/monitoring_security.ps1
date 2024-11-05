@@ -187,7 +187,7 @@ $systemprobeYamlContent | Set-Content -Path $systemprobeConfigFile -Encoding UTF
 Write-Host "Updating win32_event_log.d/conf.yaml file"
 $windowsEventLogConfigFile = "C:\ProgramData\Datadog\conf.d\win32_event_log.d\conf.yaml"
 
-# Content to write to system-probe.yaml
+# Content to write to win32_event_log.d/conf.yaml
 $windowsEventLogYamlContent = @"
 logs:
   - type: windows_event
@@ -210,6 +210,7 @@ logs:
 $windowsEventLogYamlContent | Set-Content -Path $windowsEventLogConfigFile -Encoding UTF8
 
 # Create a new log configuration to collect all logs from every directory
+$logConfigDirectory = "C:\ProgramData\Datadog\conf.d"
 $logsConfig = @"
 logs:
   - type: file
