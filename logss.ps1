@@ -1,9 +1,9 @@
 # Define the path to the log file
-$logFilePath = "C:\Logs\log\mylog.log"
+$logFilePath = "C:\Logs\log\log\mylog.log"
 
 # Ensure the Logs directory exists
-if (!(Test-Path -Path "C:\Logs\log")) {
-    New-Item -ItemType Directory -Path "C:\Logs\log"
+if (!(Test-Path -Path "C:\Logs\log\log")) {
+    New-Item -ItemType Directory -Path "C:\Logs\log\log"
 }
 
 # Function to write logs
