@@ -9,6 +9,7 @@
 ## Installation
 
 #### Installing Datadog Agent (Windows)
+Run Powershell as Administrator
 
 ```shell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Invoke-Expression 
