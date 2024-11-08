@@ -134,12 +134,6 @@ spec:
       enabled: true
     processDiscovery:
       enabled: true
-    oomKill:
-      enabled: true
-    tcpQueueLength:
-      enabled: true
-    ebpfCheck:
-      enabled: true
     asm:
       threats:
         enabled: true
@@ -160,29 +154,6 @@ spec:
       enabled: true
     npm:
       enabled: true
-    remoteConfiguration:
-      enabled: true
-    eventCollection:
-      collectKubernetesEvents: true
-    orchestratorExplorer:
-      enabled: true
-    kubeStateMetricsCore:
-      enabled: true
-    admissionController:
-      enabled: true
-    externalMetricsServer:
-      enabled: true
-    clusterChecks:
-      enabled: true
-    prometheusScrape:
-      enabled: true
-    otlp:
-      receiver:
-        protocols:
-          grpc:
-            enabled: true
-          http:
-            enabled: true
 EOF
 
 # Step 3: Apply the Datadog agent configuration
