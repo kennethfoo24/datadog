@@ -112,6 +112,12 @@ spec:
     kubelet:
       tlsVerify: false
   features:
+    logCollection:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    liveContainerCollection:
+      enabled: true
     apm:
       instrumentation:
         enabled: true
@@ -121,40 +127,13 @@ spec:
           python: "2"
           js: "5"
           ruby: "2"
-    logCollection:
-      enabled: true
-      containerCollectAll: true
-    liveProcessCollection:
-      enabled: true
-    liveContainerCollection:
-      enabled: true
-    processDiscovery:
-      enabled: true
-    oomKill:
-      enabled: true
-    tcpQueueLength:
-      enabled: true
-    ebpfCheck:
-      enabled: true
-    asm:
-      threats:
-        enabled: true
-      sca:
-        enabled: true
-      iast:
-        enabled: true
-    cws:
-      enabled: true
     cspm:
       enabled: true
-    sbom:
-      containerImage:
-        enabled: true
-      host:
-        enabled: true
-    usm:
+    cws:
       enabled: true
     npm:
+      enabled: true
+    usm:
       enabled: true
     otlp:
       receiver:
@@ -167,20 +146,11 @@ spec:
       enabled: true
     sbom:
       enabled: true
-    eventCollection:
-      collectKubernetesEvents: true
-    orchestratorExplorer:
-      enabled: true
-    kubeStateMetricsCore:
-      enabled: true
-    admissionController:
-      enabled: true
     externalMetricsServer:
-      enabled: true
-    clusterChecks:
       enabled: true
     prometheusScrape:
       enabled: true
+      enableServiceEndpoints: true
 EOF
 
 # Step 3: Apply the Datadog agent configuration
