@@ -130,6 +130,12 @@ spec:
       enabled: true
     processDiscovery:
       enabled: true
+    oomKill:
+      enabled: true
+    tcpQueueLength:
+      enabled: true
+    ebpfCheck:
+      enabled: true
     asm:
       threats:
         enabled: true
@@ -149,6 +155,31 @@ spec:
     usm:
       enabled: true
     npm:
+      enabled: true
+    otlp:
+      receiver:
+        protocols:
+          grpc:
+            enabled: true
+          http:
+            enabled: true
+    remoteConfiguration:
+      enabled: true
+    sbom:
+      enabled: true
+    eventCollection:
+      collectKubernetesEvents: true
+    orchestratorExplorer:
+      enabled: true
+    kubeStateMetricsCore:
+      enabled: true
+    admissionController:
+      enabled: true
+    externalMetricsServer:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    prometheusScrape:
       enabled: true
 EOF
 
