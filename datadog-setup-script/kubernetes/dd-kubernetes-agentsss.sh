@@ -109,6 +109,8 @@ spec:
       - "env:$ENV_NAME"
     credentials:
       apiKey: $DD_API_KEY
+    kubelet:
+      tlsVerify: false
   features:
     apm:
       instrumentation:
