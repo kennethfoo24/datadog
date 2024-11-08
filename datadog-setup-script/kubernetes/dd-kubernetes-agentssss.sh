@@ -162,10 +162,7 @@ echo "Displaying resources created"
 echo "1. Datadog Operator:"
 kubectl get deployments -l "app.kubernetes.io/name=datadog-operator"
 
-echo "2. Datadog API Key Secret:"
-kubectl get secret "$DATADOG_SECRET_NAME"
-
-echo "3. DatadogAgent Custom Resource:"
+echo "2. DatadogAgent Custom Resource:"
 kubectl get datadogagent 
 
 echo "Datadog Agent installation complete."
