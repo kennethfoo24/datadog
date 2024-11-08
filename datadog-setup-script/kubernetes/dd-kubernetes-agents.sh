@@ -64,7 +64,6 @@ read -p "Enter the environment of your service (eg: production,staging) [default
 ENV_NAME=${ENV_NAME:-default_env}
 
 # Variables - Update these as needed
-DATADOG_SECRET_NAME="datadog-secret"
 DATADOG_CONFIG_FILE="datadog-agent.yaml"
 
 # Function to install Helm if the user agrees
@@ -93,9 +92,6 @@ helm repo update
 echo "Installing Datadog Operator"
 helm install datadog-operator datadog/datadog-operator
 
-# Step 1: Create Datadog API Key Secret in Kubernetes
-echo "Creating Datadog API key secret..."
-kubectl create secret generic "$DATADOG_SECRET_NAME" --from-literal=api-key="$DATADOG_API_KEY" --dry-run=client -o yaml | kubectl apply -f -
 
 # Step 2: Create the Datadog agent configuration YAML
 echo "Creating Datadog agent configuration file..."
@@ -112,9 +108,8 @@ spec:
     tags:
       - "env:$ENV_NAME"
     credentials:
-      apiSecret:
-        secretName: "$DATADOG_SECRET_NAME"
-        keyName: "api-key"
+      credentials:
+        apiKey: $DD_API_KEY
   features:
     apm:
       instrumentation:
