@@ -59,10 +59,6 @@ fi
 read -p "Enter the name of your kubernetes cluster (eg: my-k8s-cluster) [default_cluster]: " CLUSTER_NAME
 CLUSTER_NAME=${CLUSTER_NAME:-default_cluster}
 
-# Prompt for namespace name
-read -p "Enter the namespace to install the Datadog Agent (default: datadog-agent): " DATADOG_NAMESPACE
-DATADOG_NAMESPACE=${DATADOG_NAMESPACE:-datadog-agent}
-
 # Prompt for env name 
 read -p "Enter the environment of your service (eg: production,staging) [default_env]: " ENV_NAME
 ENV_NAME=${ENV_NAME:-default_env}
@@ -90,20 +86,16 @@ if ! command -v helm &> /dev/null; then
   install_helm
 fi
 
-# Step 1: Create the specified namespace if it doesn't already exist
-echo "Creating the '$DATADOG_NAMESPACE' namespace..."
-kubectl get namespace "$DATADOG_NAMESPACE" &> /dev/null || kubectl create namespace "$DATADOG_NAMESPACE"
-
 # Step 1: Add the Datadog Helm repository and install the Datadog operator
 echo "Adding Datadog Helm repository..."
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
-echo "Installing Datadog Operator in the '$DATADOG_NAMESPACE' namespace..."
-helm install datadog-operator datadog/datadog-operator --namespace "$DATADOG_NAMESPACE"
+echo "Installing Datadog Operator"
+helm install datadog-operator datadog/datadog-operator
 
 # Step 1: Create Datadog API Key Secret in Kubernetes
 echo "Creating Datadog API key secret..."
-kubectl create secret generic "$DATADOG_SECRET_NAME" --namespace "$DATADOG_NAMESPACE" --from-literal=api-key="$DATADOG_API_KEY" --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret generic "$DATADOG_SECRET_NAME" --from-literal=api-key="$DATADOG_API_KEY" --dry-run=client -o yaml | kubectl apply -f -
 
 # Step 2: Create the Datadog agent configuration YAML
 echo "Creating Datadog agent configuration file..."
@@ -112,7 +104,6 @@ apiVersion: "datadoghq.com/v2alpha1"
 kind: "DatadogAgent"
 metadata:
   name: "datadog"
-  namespace: "$DATADOG_NAMESPACE"
 spec:
   global:
     clusterName: "$CLUSTER_NAME"
@@ -195,19 +186,19 @@ spec:
 EOF
 
 # Step 3: Apply the Datadog agent configuration
-echo "Applying Datadog agent configuration in the '$DATADOG_NAMESPACE' namespace..."
-kubectl apply -f "$DATADOG_CONFIG_FILE" --namespace "$DATADOG_NAMESPACE"
+echo "Applying Datadog agent configuration"
+kubectl apply -f "$DATADOG_CONFIG_FILE"
 
 # Step 6: Display created resources
-echo "Displaying resources created in the '$DATADOG_NAMESPACE' namespace..."
+echo "Displaying resources created"
 
 echo "1. Datadog Operator:"
-kubectl get deployments -n "$DATADOG_NAMESPACE" -l "app.kubernetes.io/name=datadog-operator"
+kubectl get deployments -l "app.kubernetes.io/name=datadog-operator"
 
 echo "2. Datadog API Key Secret:"
-kubectl get secret "$DATADOG_SECRET_NAME" -n "$DATADOG_NAMESPACE"
+kubectl get secret "$DATADOG_SECRET_NAME"
 
 echo "3. DatadogAgent Custom Resource:"
-kubectl get datadogagent -n "$DATADOG_NAMESPACE"
+kubectl get datadogagent 
 
 echo "Datadog Agent installation complete."
