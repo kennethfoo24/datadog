@@ -108,8 +108,7 @@ spec:
     tags:
       - "env:$ENV_NAME"
     credentials:
-      credentials:
-        apiKey: $DD_API_KEY
+      apiKey: $DD_API_KEY
   features:
     apm:
       instrumentation:
