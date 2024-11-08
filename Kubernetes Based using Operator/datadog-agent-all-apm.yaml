@@ -14,14 +14,6 @@ spec:
       enabled: true
     liveContainerCollection:
       enabled: true
-    processDiscovery:
-      enabled: true
-    oomKill:
-      enabled: true
-    tcpQueueLength:
-      enabled: true
-    ebpfCheck:
-      enabled: true
     apm:
       instrumentation:
         enabled: true
@@ -31,10 +23,6 @@ spec:
           python: "2"
           js: "5"
           ruby: "2"
-    dogstatsd:
-      originDetectionEnabled: true
-      unixDomainSocketConfig:
-        enabled: true
     cspm:
       enabled: true
     cws:
@@ -54,17 +42,8 @@ spec:
       enabled: true
     sbom:
       enabled: true
-    eventCollection:
-      collectKubernetesEvents: true
-    orchestratorExplorer:
-      enabled: true
-    kubeStateMetricsCore:
-      enabled: true
-    admissionController:
-      enabled: true
     externalMetricsServer:
-      enabled: true
-    clusterChecks:
       enabled: true
     prometheusScrape:
       enabled: true
+      enableServiceEndpoints: true
