@@ -4,15 +4,21 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName:  <CLUSTER-NAME>
     credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
+      apiKey: <API-KEY>
+      appKey: <APP-KEY>
   features:
     logCollection:
       enabled: true
+      containerCollectAll: true
     liveProcessCollection:
       enabled: true
     liveContainerCollection:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    ebpfCheck:
       enabled: true
     apm:
       enabled: true
@@ -21,14 +27,33 @@ spec:
         hostPort: 8126
       unixDomainSocketConfig:
         enabled: true
-    cspm:
-      enabled: true
+    dogstatsd:
+      originDetectionEnabled: true
+      unixDomainSocketConfig:
+        enabled: true
+    asm:
+      threats:
+        enabled: true
+      sca:
+        enabled: true
+      iast:
+        enabled: true
     cws:
       enabled: true
+    cspm:
+      enabled: true
+    sbom:
+      containerImage:
+        enabled: true
+      host:
+        enabled: true
     npm:
       enabled: true
     usm:
       enabled: true
+    dogstatsd:
+      unixDomainSocketConfig:
+        enabled: true
     otlp:
       receiver:
         protocols:
@@ -40,8 +65,17 @@ spec:
       enabled: true
     sbom:
       enabled: true
+    eventCollection:
+      collectKubernetesEvents: true
+    orchestratorExplorer:
+      enabled: true
+    kubeStateMetricsCore:
+      enabled: true
+    admissionController:
+      enabled: true
     externalMetricsServer:
+      enabled: true
+    clusterChecks:
       enabled: true
     prometheusScrape:
       enabled: true
-      enableServiceEndpoints: true
