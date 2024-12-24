@@ -39,6 +39,7 @@ docker run -d --name dd-agent \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /var/run/datadog/:/var/run/datadog/ \
 -v /proc/:/host/proc/:ro \
 -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
