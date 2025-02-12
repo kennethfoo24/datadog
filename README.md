@@ -43,15 +43,15 @@ $productCode = (@(Get-ChildItem -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVe
 #### Uninstall Datadog (Linux)
 
 ```bash
-sudo apt-get remove datadog-agent -y \
-dd-host-install --uninstall \
-sudo apt-get remove --purge datadog-agent -y \
+sudo apt-get remove datadog-agent -y 
+dd-host-install --uninstall 
+sudo apt-get remove --purge datadog-agent -y 
 ```
 ```bash
-sudo yum remove datadog-agent \
-dd-host-install --uninstall \
-sudo userdel dd-agent \
-&& sudo rm -rf /opt/datadog-agent/ \
-&& sudo rm -rf /etc/datadog-agent/ \
-&& sudo rm -rf /var/log/datadog/
+sudo yum remove datadog-agent
+dd-host-install --uninstall
+sudo userdel dd-agent
+sudo rm -rf /opt/datadog-agent/
+sudo rm -rf /etc/datadog-agent/
+sudo rm -rf /var/log/datadog/
 ```
