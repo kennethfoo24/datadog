@@ -41,7 +41,7 @@ npm install
 
 # Start the application
 echo "Starting the application..."
-node app.js > mixed.log 2>&1 & # Run in the background
+DD_LOGS_INJECTION=true DD_TRACE_SAMPLE_RATE="1" DD_PROFILING_ENABLED=true DD_APPSEC_ENABLED=true DD_IAST_ENABLED=true DD_APPSEC_SCA_ENABLED=true node --require dd-trace/init app.js > mixed.log 2>&1 & # Run in the background
 APP_PID=$!
 
 # Wait for the application to start
