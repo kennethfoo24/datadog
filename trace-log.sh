@@ -6,9 +6,24 @@ APP_DIR="simple-nodejs-ddtrace"
 API_BASE_URL="http://localhost:3000" # Change this if the app runs on a different port
 
 # Update and install dependencies
-echo "Updating package lists and installing Node.js..."
+echo "Updating package lists..."
 sudo apt-get update -y
-sudo apt-get install -y nodejs npm curl
+
+# (Optional) Remove older Node.js installations
+echo "Removing any older Node.js or npm versions..."
+sudo apt-get remove -y nodejs npm
+
+# Add official NodeSource repository for Node.js 22.x (example)
+echo "Adding NodeSource repository for Node.js 22.x..."
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+
+# Install Node.js from NodeSource
+echo "Installing Node.js from NodeSource..."
+sudo apt-get install -y nodejs curl
+
+# Check node and npm versions
+echo "Node version: $(node -v)"
+echo "NPM version:  $(npm -v)"
 
 # Clone the repository
 if [ -d "$APP_DIR" ]; then
