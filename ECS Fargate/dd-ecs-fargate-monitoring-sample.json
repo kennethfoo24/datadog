@@ -1,0 +1,107 @@
+{
+    "family": "<TASK_NAME>",
+    "networkMode": "awsvpc",
+    "cpu": "256",
+    "memory": "512",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "pidMode": "task",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            "essential": true,
+            "environment": [
+                {"name": "DD_API_KEY","value": "<API_KEY>"},
+                {"name": "DD_SITE","value": "datadoghq.com"},
+                {"name": "ECS_FARGATE","value": "true"},
+                {"name": "DD_APM_ENABLED","value": "true"},
+                {"name": "DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED","value": "true"}
+            ],
+            "portMappings": [
+                {
+                    "name": "datadog-agent-8126-tcp",
+                    "containerPort": 8126,
+                    "hostPort": 8126,
+                    "protocol": "tcp"
+                }
+            ]
+        },
+        {
+            "name": "log_router",
+            "image": "amazon/aws-for-fluent-bit:stable",
+            "memoryReservation": 50,
+            "essential": true,
+            "firelensConfiguration": {
+                "type": "fluentbit",
+                "options": {
+                    "config-file-type": "file",
+                    "config-file-value": "/fluent-bit/configs/parse-json.conf",
+                    "enable-ecs-log-metadata": "true"
+                }
+            }
+        },
+        {
+            "name": "app",
+            "image": "app",
+            "essential": true,
+            "environment": [
+                {"name": "DD_SERVICE","value": "<SERVICE_NAME>"},
+                {"name": "DD_ENV","value": "<ENV_NAME>"},
+                {"name": "DD_VERSION","value": "<VERSION>"},
+                {"name": "DD_RUNTIME_METRICS_ENABLED","value": "true"},
+                {"name": "DD_PROFILING_ENABLED","value": "true"},
+                {"name": "DD_TRACE_SAMPLE_RATE","value": "1"},
+                {"name": "DD_APPSEC_ENABLED","value": "true"},
+                {"name": "DD_IAST_ENABLED","value": "true"},
+                {"name": "DD_APPSEC_SCA_ENABLED","value": "true"},
+                {"name": "DD_APM_ENABLED","value": "true"}
+            ],
+            "dockerLabels": {
+                "com.datadoghq.tags.service": "<SERVICE_NAME>",
+                "com.datadoghq.tags.version": "<VERSION>",
+                "com.datadoghq.tags.env": "<ENV_NAME>"
+            },
+            "logConfiguration": {
+                "logDriver": "awsfirelens",
+                "options": {
+                    "dd_message_key": "log",
+                    "apikey": "<API_KEY>",
+                    "Name": "datadog",
+                    "Host": "http-intake.logs.datadoghq.com",
+                    "TLS": "on",
+                    "dd_service": "<SERVICE_NAME>",
+                    "dd_source": "<SOURCE_NAME>",
+                    "dd_tags": "project:example",
+                    "provider": "ecs",
+                    "retry_limit": "2"
+                }
+            }
+        }
+    ]
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
