@@ -55,3 +55,8 @@ sudo rm -rf /opt/datadog-agent/
 sudo rm -rf /etc/datadog-agent/
 sudo rm -rf /var/log/datadog/
 ```
+```bash
+sudo sh -c 'datadog-agent config set log_level debug && datadog-agent config set profile true && datadog-agent restart && sleep 300 && datadog-agent flare && datadog-agent config set log_level info && datadog-agent config set profile false && datadog-agent restart'
+```
+
+
