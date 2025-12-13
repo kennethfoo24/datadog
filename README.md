@@ -55,8 +55,49 @@ sudo rm -rf /opt/datadog-agent/
 sudo rm -rf /etc/datadog-agent/
 sudo rm -rf /var/log/datadog/
 ```
+#### Debug Agent Logs Datadog (Linux)
 ```bash
 sudo sh -c 'datadog-agent config set log_level debug && datadog-agent config set profile true && datadog-agent restart && sleep 300 && datadog-agent flare && datadog-agent config set log_level info && datadog-agent config set profile false && datadog-agent restart'
+```
+#### Debug Agent Logs Datadog (Windows)
+```bash
+powershell -Command "& {
+  $agent = \"$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe\";
+  & $agent config set log_level debug;
+  & $agent config set profile true;
+  & $agent restart;
+  Start-Sleep -Seconds 300;
+  & $agent flare -p 300 -B -M;
+  & $agent config set log_level info;
+  & $agent config set profile false;
+  & $agent restart;
+}"
+```
+#### Debug Agent Logs Datadog (Docker)
+```bash
+docker exec -it datadog-agent sh -c '
+  agent config set log_level debug &&
+  agent config set profile true &&
+  agent restart &&
+  sleep 300 &&
+  agent flare -p 300 -B -M &&
+  agent config set log_level info &&
+  agent config set profile false &&
+  agent restart
+'
+```
+#### Debug Agent Logs Datadog (Kubernetes)
+```bash
+kubectl exec -it <AGENT_POD> -- sh -c '
+  agent config set log_level debug &&
+  agent config set profile true &&
+  agent restart &&
+  sleep 300 &&
+  agent flare -p 300 -B -M &&
+  agent config set log_level info &&
+  agent config set profile false &&
+  agent restart
+'
 ```
 
 
